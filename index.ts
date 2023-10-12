@@ -2,6 +2,7 @@ import { program } from 'commander'
 import { resolve } from 'node:path'
 import { readFile, mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
+import simpleGit from 'simple-git'
 
 const CONFIG_DIR = resolve(homedir(), `.config/git-switcher`)
 
@@ -42,15 +43,10 @@ program
       return
     }
 
-    const nameProc = Bun.spawn(['git', 'config', 'user.name', `${profile.name}`], {
-      cwd: process.cwd(),
-    })
+    await simpleGit()
+      .addConfig('user.email', profile.email)
+      .addConfig('user.name', profile.name)
 
-    const emailProc = Bun.spawn(['git', 'config', 'user.email', `${profile.email}`], {
-      cwd: process.cwd(),
-    })
-
-    await Promise.all([nameProc.exited, emailProc.exited])
     console.log('✅ Profile changed')
   })
 
