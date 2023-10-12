@@ -3,6 +3,7 @@ import { resolve } from 'node:path'
 import { readFile, mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import simpleGit from 'simple-git'
+import inquirer from 'inquirer'
 
 const CONFIG_DIR = resolve(homedir(), `.config/git-switcher`)
 
@@ -52,15 +53,38 @@ program
 
 program
   .command('add')
-  .requiredOption('--profile-name <string>', 'profile name')
-  .requiredOption('--email <string>', 'profile email')
-  .requiredOption('--name <string>', 'profile user email')
-  .action(async (options) => {
+  .action(async () => {
     await mkdir(CONFIG_DIR, { recursive: true })
+
+    const {
+      profileName,
+      email,
+      name,
+    }: {
+      profileName: string
+      email: string
+      name: string
+    } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'profileName',
+        message: 'Profile name',
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'Profile email',
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Profile name',
+      },
+    ])
 
     const config = await readConfig()
     
-    const exists = config.profiles.find(profile => profile.profileName === options.profileName)
+    const exists = config.profiles.find(profile => profile.profileName === profileName)
 
     if (exists) {
       console.log('Profile already exists')
@@ -71,7 +95,11 @@ program
       resolve(CONFIG_DIR, 'config.json'), 
       JSON.stringify({
         ...config,
-        profiles: [...config.profiles, options]
+        profiles: [...config.profiles, {
+          profileName,
+          email,
+          name,
+        }]
       } satisfies Config, null, 2)
     )
   })
