@@ -6,8 +6,13 @@
     "build": "bun build ./index.ts --compile --minify --outfile gitswitcher"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.5.1",
     "@types/inquirer": "^9.0.4",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "eslint": "^8.51.0",
+    "eslint-config-alsacreations": "^1.4.1",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
