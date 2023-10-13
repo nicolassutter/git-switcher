@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build ./index.ts --compile --minify --outfile gitswitcher"
+    "build": "bun build ./index.ts --compile --minify --outfile gitswitcher",
+    "release": "bumpp"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.5.1",
@@ -18,6 +19,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "bumpp": "^9.2.0",
     "commander": "^11.0.0",
     "inquirer": "^9.2.11",
     "simple-git": "^3.20.0"
