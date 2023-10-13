@@ -10,15 +10,16 @@ const CONFIG_DIR = resolve(homedir(), `.config/git-switcher`)
 
 type Config = {
   profiles: {
-    email: string
-    name: string
-    profileName: string
-  }[]
+    [key: string]: {
+      email: string
+      name: string
+    }
+  }
 }
 
 async function readConfig() {
   const defaultConfig: Config = {
-    profiles: [],
+    profiles: {},
   }
 
   try {
@@ -36,9 +37,9 @@ async function readConfig() {
 program.command('use').action(async () => {
   const config = await readConfig()
 
-  if (config.profiles.length === 0) {
+  if (Object.keys(config.profiles).length === 0) {
     console.log(
-      'There are no profiles to use, add one with  `git-switcher add`',
+      '⚠️ There are no profiles to use, add one with  `git-switcher add`',
     )
     return
   }
@@ -50,24 +51,24 @@ program.command('use').action(async () => {
   } = await inquirer.prompt([
     {
       type: 'list',
-      choices: config.profiles.map((profile): ChoiceOptions => {
-        return {
-          name: profile.profileName,
-          value: profile.profileName,
-        }
-      }),
+      choices: Object.entries(config.profiles).map(
+        ([profileName]): ChoiceOptions => {
+          return {
+            name: profileName,
+            value: profileName,
+          }
+        },
+      ),
       loop: true,
       message: 'Profile to use',
       name: 'profileNameToUse',
     },
   ])
 
-  const profile = config.profiles.find(
-    (profile) => profile.profileName === profileNameToUse,
-  )
+  const profile = config.profiles[profileNameToUse]
 
   if (!profile) {
-    console.log('Profile not found')
+    console.log('❌ Profile not found')
     return
   }
 
@@ -109,12 +110,10 @@ program.command('add').action(async () => {
 
   const config = await readConfig()
 
-  const exists = config.profiles.find(
-    (profile) => profile.profileName === profileName,
-  )
+  const exists = config.profiles[profileName]
 
   if (exists) {
-    console.log('Profile already exists')
+    console.log('❌ Profile already exists')
     return
   }
 
@@ -123,14 +122,13 @@ program.command('add').action(async () => {
     JSON.stringify(
       {
         ...config,
-        profiles: [
+        profiles: {
           ...config.profiles,
-          {
-            profileName,
+          [profileName]: {
             email,
             name,
           },
-        ],
+        },
       } satisfies Config,
       null,
       2,
