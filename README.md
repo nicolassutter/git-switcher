@@ -1,15 +1,13 @@
 # git-switcher
 
-To install dependencies:
+Save git profiles and easily switch between them.
 
-```bash
-bun install
+## Commands
+
+```sh
+gitswitcher add # to add a new profile
+gitswitcher use # to use an existing profile
+gitswitcher edit # to edit an existing profile
+gitswitcher rm # to delete an existing profile
+gitswitcher list # to list the current gitswitcher config file that contains the profiles
 ```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.6. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
