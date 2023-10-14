@@ -1,10 +1,10 @@
-# git-switcher
+# gitswitcher
 
 Save git profiles and easily switch between them.
 
-## Installation
+## 🚀 Installation
 
-1. Download `gitswitcher` executable from the latest release
+1. Download `gitswitcher` executable from the latest [release](https://github.com/nicolassutter/gitswitcher/releases)
 2. Place it somewhere of your choosing on your system
 3. Rename the file to `gitswitcher` (or anything that might suit you better)
 4. Set its permissions
@@ -30,7 +30,7 @@ Save git profiles and easily switch between them.
 6. Restart your shell
 7. Stat using the commands!
 
-## Commands
+## ⚙️ Commands
 
 ```sh
 gitswitcher add # to add a new profile
