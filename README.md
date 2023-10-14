@@ -16,12 +16,17 @@ Save git profiles and easily switch between them.
 5. Add the executable parent directory to your $PATH
 
    ```sh
-   # fish
+   # fish -> ~/.config/fish/config.fish
    set --export PATH /path/to/gitswitcher/parent/directory $PATH
    # If you placed your executable file at ~/Documents/bin/gitswitcher, you can add it to your $PATH like this:
    # set --export PATH ~/Documents/bin $PATH
 
-   # bash
+   # bash -> ~/.bashrc
+   export PATH=/path/to/gitswitcher/parent/directory:$PATH
+   # If you placed your executable file at ~/Documents/bin/gitswitcher, you can add it to your $PATH like this:
+   # export PATH=~/Documents/bin:$PATH
+
+   # zsh -> ~/.zshrc
    export PATH=/path/to/gitswitcher/parent/directory:$PATH
    # If you placed your executable file at ~/Documents/bin/gitswitcher, you can add it to your $PATH like this:
    # export PATH=~/Documents/bin:$PATH
