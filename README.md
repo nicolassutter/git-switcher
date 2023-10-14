@@ -6,20 +6,29 @@ Save git profiles and easily switch between them.
 
 1. Download `gitswitcher` executable from the latest release
 2. Place it somewhere of your choosing on your system
-3. Set its permissions
+3. Rename the file to `gitswitcher` (or anything that might suit you better)
+4. Set its permissions
 
    ```sh
    chmod +x /path/to/gitswitcher
    ```
 
-4. Add the executable to your $PATH
+5. Add the executable parent directory to your $PATH
 
    ```sh
    # fish
-   set --export PATH /path/to/gitswitcher $PATH
+   set --export PATH /path/to/gitswitcher/parent/directory $PATH
+   # If you placed your executable file at ~/Documents/bin/gitswitcher, you can add it to your $PATH like this:
+   # set --export PATH ~/Documents/bin $PATH
+
+   # bash
+   export PATH=/path/to/gitswitcher/parent/directory:$PATH
+   # If you placed your executable file at ~/Documents/bin/gitswitcher, you can add it to your $PATH like this:
+   # export PATH=~/Documents/bin:$PATH
    ```
 
-5. Stat using the commands!
+6. Restart your shell
+7. Stat using the commands!
 
 ## Commands
 
